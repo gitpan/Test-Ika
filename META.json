@@ -1,0 +1,80 @@
+{
+   "abstract" : "Yet another BDD testing library(Development Release)",
+   "author" : [
+      "Tokuhiro Matsuno E<lt>tokuhirom AAJKLFJEF@ GMAIL COME<gt>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Test-Ika",
+   "no_index" : {
+      "directory" : [
+         "inc"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0.98",
+            "Test::Requires" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.38"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Exporter" : "0",
+            "Module::Load" : "0",
+            "Scope::Guard" : "0",
+            "Term::Encoding" : "0",
+            "Test::More" : "0.98",
+            "Test::Name::FromLine" : "0.06",
+            "Try::Tiny" : "0",
+            "parent" : "0",
+            "perl" : "5.010001"
+         }
+      }
+   },
+   "provides" : {
+      "Test::Ika" : {
+         "file" : "lib/Test/Ika.pm",
+         "version" : "0.00_01"
+      },
+      "Test::Ika::Example" : {
+         "file" : "lib/Test/Ika/Example.pm",
+         "version" : 0
+      },
+      "Test::Ika::ExampleGroup" : {
+         "file" : "lib/Test/Ika/ExampleGroup.pm",
+         "version" : 0
+      },
+      "Test::Ika::Reporter::Spec" : {
+         "file" : "lib/Test/Ika/Reporter/Spec.pm",
+         "version" : 0
+      },
+      "Test::Ika::Reporter::TAP" : {
+         "file" : "lib/Test/Ika/Reporter/TAP.pm",
+         "version" : 0
+      },
+      "Test::Ika::Reporter::Test" : {
+         "file" : "lib/Test/Ika/Reporter/Test.pm",
+         "version" : 0
+      }
+   },
+   "release_status" : "testing",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ]
+   },
+   "version" : "0.00_01"
+}
