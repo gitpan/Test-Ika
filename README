@@ -77,6 +77,13 @@ FUNCTIONS
         Normally, you don't call this method expressly. Test::Ika runs test
         cases on END { } phase.
 
+CLASS METHODS
+    Test::Ika->reporter()
+        Get a reporter instance.
+
+    Test::Ika->set_reporter($module)
+        Load a reporter class.
+
 AUTHOR
     Tokuhiro Matsuno <tokuhirom AAJKLFJEF@ GMAIL COM>
 
