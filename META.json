@@ -47,7 +47,7 @@
    "provides" : {
       "Test::Ika" : {
          "file" : "lib/Test/Ika.pm",
-         "version" : "0.00_02"
+         "version" : "0.01"
       },
       "Test::Ika::Example" : {
          "file" : "lib/Test/Ika/Example.pm",
@@ -70,11 +70,11 @@
          "version" : 0
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "license" : [
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.00_02"
+   "version" : "0.01"
 }
