@@ -20,7 +20,7 @@ no_index:
 provides:
   Test::Ika:
     file: lib/Test/Ika.pm
-    version: 0.01
+    version: 0.02
   Test::Ika::Example:
     file: lib/Test/Ika/Example.pm
     version: 0
@@ -48,4 +48,4 @@ requires:
   perl: 5.010001
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.01
+version: 0.02

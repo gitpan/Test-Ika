@@ -59,10 +59,16 @@ FUNCTIONS
     it($name, $code)
         Create new Test::Ika::Example.
 
+    before_suite(\&code)
+        Register hook.
+
     before_all(\&code)
         Register hook.
 
     before_each(\&code)
+        Register hook.
+
+    after_suite(\&code)
         Register hook.
 
     after_all(\&code)
