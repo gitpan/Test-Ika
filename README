@@ -59,6 +59,9 @@ FUNCTIONS
     it($name, $code)
         Create new Test::Ika::Example.
 
+    xit($name, $code)
+        Create new Test::Ika::Example which marked "disabled".
+
     before_suite(\&code)
         Register hook.
 

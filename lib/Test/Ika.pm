@@ -2,7 +2,7 @@ package Test::Ika;
 use strict;
 use warnings;
 use 5.010001;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Module::Load;
 use Test::Name::FromLine;
@@ -14,6 +14,7 @@ use parent qw/Exporter/;
 
 our @EXPORT = (qw(
     describe it context
+    xit
     before_suite after_suite
     before_all after_all before_each after_each
     runtests
@@ -65,6 +66,12 @@ sub describe {
 sub it {
     my ($name, $code) = @_;
     my $it = Test::Ika::Example->new(name => $name, code => $code);
+    $CURRENT->add_example($it);
+}
+
+sub xit {
+    my ($name, $code) = @_;
+    my $it = Test::Ika::Example->new(name => $name, code => $code, skip => 1);
     $CURRENT->add_example($it);
 }
 
@@ -211,6 +218,10 @@ It's alias of 'describe' function.
 =item it($name, $code)
 
 Create new L<Test::Ika::Example>.
+
+=item xit($name, $code)
+
+Create new L<Test::Ika::Example> which marked "disabled".
 
 =item before_suite(\&code)
 
