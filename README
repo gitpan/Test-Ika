@@ -56,10 +56,36 @@ FUNCTIONS
     context
         It's alias of 'describe' function.
 
-    it($name, $code)
+    it($name, \&code)
         Create new Test::Ika::Example.
 
-    xit($name, $code)
+    it($name, $cond, \&code)
+        Create new conditional Test::Ika::Example.
+
+        $cond is usually a sub-routine reference. You can set it with "when"
+        statement.
+
+          # run this example, if C<$ENV{TEST_MESSAGE}> returns true
+
+          my $cond = sub { $ENV{TEST_MESSAGE} };
+
+          it 'should detect message', $cond => sub {
+              my $filter = MessageFilter->new('foo');
+              expect($filter->detect('hello foo'))->ok;
+          };
+
+    when(\&code)
+        Specify conditional sub-routine.
+
+        You can write conditional example as shown below:
+
+          it 'should detect message', when { $ENV{TEST_MESSAGE} } => sub {
+              my $filter = MessageFilter->new('foo');
+              expect($filter->detect('hello foo'))->ok;
+          };
+
+    xit($name, \&code)
+    xit($name, $cond, \&code)
         Create new Test::Ika::Example which marked "disabled".
 
     before_suite(\&code)
