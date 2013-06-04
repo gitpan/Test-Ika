@@ -1,14 +1,16 @@
 ---
 abstract: 'Yet another BDD testing library(Development Release)'
 author:
-  - 'Tokuhiro Matsuno E<lt>tokuhirom AAJKLFJEF@ GMAIL COME<gt>'
+  - 'Tokuhiro Matsuno <tokuhirom AAJKLFJEF@ GMAIL COM>'
 build_requires:
   Test::More: 0.98
   Test::Requires: 0
 configure_requires:
+  CPAN::Meta: 0
+  CPAN::Meta::Prereqs: 0
   Module::Build: 0.38
 dynamic_config: 0
-generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Minilla/v0.4.6, CPAN::Meta::Converter version 2.130880'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -16,36 +18,45 @@ meta-spec:
 name: Test-Ika
 no_index:
   directory:
+    - t
+    - xt
     - inc
+    - share
+    - eg
+    - examples
+    - author
 provides:
   Test::Ika:
     file: lib/Test/Ika.pm
-    version: 0.04
+    version: 0.05
   Test::Ika::Example:
     file: lib/Test/Ika/Example.pm
-    version: 0
   Test::Ika::ExampleGroup:
     file: lib/Test/Ika/ExampleGroup.pm
-    version: 0
   Test::Ika::Reporter::Spec:
     file: lib/Test/Ika/Reporter/Spec.pm
-    version: 0
   Test::Ika::Reporter::TAP:
     file: lib/Test/Ika/Reporter/TAP.pm
-    version: 0
   Test::Ika::Reporter::Test:
     file: lib/Test/Ika/Reporter/Test.pm
-    version: 0
 requires:
   Exporter: 0
   Module::Load: 0
   Scope::Guard: 0
+  Term::ANSIColor: 0
   Term::Encoding: 0
+  Test::Builder: 0
+  Test::Builder::Module: 0
   Test::More: 0.98
   Test::Name::FromLine: 0.06
   Try::Tiny: 0
   parent: 0
   perl: 5.010001
 resources:
-  license: http://dev.perl.org/licenses/
-version: 0.04
+  bugtracker: https://github.com/tokuhirom/Test-Ika/issues
+  homepage: https://github.com/tokuhirom/Test-Ika
+  repository: git://github.com/tokuhirom/Test-Ika.git
+version: 0.05
+x_contributors:
+  - 'ikasam_a <masaki.nakagawa@gmail.com>'
+  - 'tokuhirom <tokuhirom@gmail.com>'

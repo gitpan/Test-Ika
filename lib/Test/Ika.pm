@@ -2,7 +2,7 @@ package Test::Ika;
 use strict;
 use warnings;
 use 5.010001;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 use Module::Load;
 use Test::Name::FromLine;
@@ -13,8 +13,8 @@ use Test::Ika::Example;
 use parent qw/Exporter/;
 
 our @EXPORT = (qw(
-    describe it context
-    xit
+    describe context it
+    xdescribe xcontext xit
     when
     before_suite after_suite
     before_all after_all before_each after_each
@@ -81,6 +81,24 @@ sub xit {
     my $it = Test::Ika::Example->new(name => $name, code => $code, cond => $cond, skip => 1);
     $CURRENT->add_example($it);
 }
+
+sub xdescribe {
+    my $caller = caller(0);
+
+    no strict 'refs';
+    no warnings 'redefine';
+
+    local *{"${caller}::it"} = \&xit;
+
+    my $noop = sub {};
+    local *{"${caller}::before_all"}  = $noop;
+    local *{"${caller}::after_all"}   = $noop;
+    local *{"${caller}::before_each"} = $noop;
+    local *{"${caller}::after_each"}  = $noop;
+
+    describe(@_);
+}
+*xcontext = \&xdescribe;
 
 sub before_suite(&) {
     my $code = shift;
@@ -214,7 +232,7 @@ Test::Ika provides some reporters.
 
 =over 4
 
-=item describe($name, $code)
+=item C<< describe($name, $code) >>
 
 Create new L<Test::Ika::ExampleGroup>.
 
@@ -222,11 +240,11 @@ Create new L<Test::Ika::ExampleGroup>.
 
 It's alias of 'describe' function.
 
-=item it($name, \&code)
+=item C<< it($name, \&code) >>
 
 Create new L<Test::Ika::Example>.
 
-=item it($name, $cond, \&code)
+=item C<< it($name, $cond, \&code) >>
 
 Create new conditional L<Test::Ika::Example>.
 
@@ -242,7 +260,7 @@ You can set it with "when" statement.
       expect($filter->detect('hello foo'))->ok;
   };
 
-=item when(\&code)
+=item C<< when(\&code) >>
 
 Specify conditional sub-routine.
 
@@ -253,37 +271,37 @@ You can write conditional example as shown below:
       expect($filter->detect('hello foo'))->ok;
   };
 
-=item xit($name, \&code)
+=item C<< xit($name, \&code) >>
 
-=item xit($name, $cond, \&code)
+=item C<< xit($name, $cond, \&code) >>
 
 Create new L<Test::Ika::Example> which marked "disabled".
 
-=item before_suite(\&code)
+=item C<< before_suite(\&code) >>
 
 Register hook.
 
-=item before_all(\&code)
+=item C<< before_all(\&code) >>
 
 Register hook.
 
-=item before_each(\&code)
+=item C<< before_each(\&code) >>
 
 Register hook.
 
-=item after_suite(\&code)
+=item C<< after_suite(\&code) >>
 
 Register hook.
 
-=item after_all(\&code)
+=item C<< after_all(\&code) >>
 
 Register hook.
 
-=item after_each(\&code)
+=item C<< after_each(\&code) >>
 
 Register hook.
 
-=item runtests()
+=item C<< runtests() >>
 
 Do run test cases immediately.
 
@@ -295,11 +313,11 @@ Normally, you don't call this method expressly. Test::Ika runs test cases on END
 
 =over 4
 
-=item Test::Ika->reporter()
+=item C<< Test::Ika->reporter() >>
 
 Get a reporter instance.
 
-=item Test::Ika->set_reporter($module)
+=item C<< Test::Ika->set_reporter($module) >>
 
 Load a reporter class.
 

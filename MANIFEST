@@ -1,8 +1,17 @@
-.travis.yml
 Build.PL
 Changes
+LICENSE
+META.json
+NOTE
+README.md
+author/test-expectation.pl
+author/test-more-behaviour.pl
+author/test-spec.pl
+cpanfile
 eg/messagefilter.t
 eg/oops.t
+eg/rspec-hook.spec
+eg/rspec-output.spec
 eg/sasata299.pl
 eg/setup-teardown.pl
 eg/spec.t
@@ -15,12 +24,6 @@ lib/Test/Ika/ExampleGroup.pm
 lib/Test/Ika/Reporter/Spec.pm
 lib/Test/Ika/Reporter/TAP.pm
 lib/Test/Ika/Reporter/Test.pm
-LICENSE
-MANIFEST			This list of files
-META.json
-META.yml
-NOTE
-README
 t/00_compile.t
 t/01_reporters.t
 t/02_hooks.t
@@ -31,9 +34,8 @@ t/06_suite_hooks_at_last.t
 t/07_suite_hooks_inner_describe.t
 t/08_xit.t
 t/09_conditional.t
-xt/01_podspell.t
+t/10_xdescribe.t
+t/11_xcontext.t
 xt/02_perlcritic.t
-xt/03_pod.t
-xt/04_minimum_version.t
-xt/05_cpan_meta.t
-xt/06_meta_author.t
+META.yml
+MANIFEST
