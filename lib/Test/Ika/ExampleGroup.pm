@@ -20,6 +20,7 @@ sub new {
         name => $name,
         parent => $args{parent},
         root => $args{root},
+        cond => exists $args{cond} ? $args{cond} : sub { 1 },
     }, $class;
 }
 
@@ -40,26 +41,41 @@ sub add_trigger {
 
 sub call_trigger {
     my ($self, $trigger_name) = @_;
-    $_->() for @{$self->{triggers}->{$trigger_name}};
+    for my $trigger (@{$self->{triggers}->{$trigger_name}}) {
+        $trigger->();
+    }
 }
 
 sub call_before_each_trigger {
     my ($self) = @_;
     $self->{parent}->call_before_each_trigger() if $self->{parent};
-    $_->() for @{$self->{triggers}->{'before_each'}};
+    for my $trigger (@{$self->{triggers}->{'before_each'}}) {
+        $trigger->();
+    }
 }
 
 sub call_after_each_trigger {
     my ($self) = @_;
-    $_->() for @{$self->{triggers}->{'after_each'}};
+    for my $trigger (@{$self->{triggers}->{'after_each'}}) {
+        $trigger->();
+    }
     $self->{parent}->call_after_each_trigger() if $self->{parent};
 }
 
 sub run {
     my ($self) = @_;
 
-    my $guard = $self->{root} ? undef : $Test::Ika::REPORTER->describe($self->{name});
-    {
+    if (defined $self->{cond}) {
+        my $cond = ref $self->{cond} eq 'CODE' ? $self->{cond}->() : $self->{cond};
+        $cond = !!$cond;
+        $self->{skip}++ unless $cond;
+    }
+
+    my $name = $self->{name};
+    $name .= ' [DISABLED]' if $self->{skip};
+    my $guard = $self->{root} ? undef : $Test::Ika::REPORTER->describe($name);
+
+    unless ($self->{skip}) {
         $self->call_trigger('before_all');
         for my $stuff (@{$self->{examples}}) {
             $self->call_before_each_trigger();

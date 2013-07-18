@@ -2,7 +2,7 @@ package Test::Ika;
 use strict;
 use warnings;
 use 5.010001;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 use Module::Load;
 use Test::Name::FromLine;
@@ -49,12 +49,14 @@ sub load_reporter {
 }
 
 sub describe {
-    my ($name, $code) = @_;
+    my $code = ref $_[-1] eq 'CODE' ? pop : sub {};
+    my ($name, $cond) = @_;
 
     my $current = $CURRENT;
     my $context = Test::Ika::ExampleGroup->new(
         name   => $name,
         parent => $current,
+        cond   => $cond,
     );
     {
         local $CURRENT = $context;
