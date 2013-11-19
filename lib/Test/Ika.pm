@@ -2,7 +2,7 @@ package Test::Ika;
 use strict;
 use warnings;
 use 5.010001;
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 use Module::Load;
 use Test::Name::FromLine;
@@ -36,6 +36,13 @@ our $REPORTER;
 
 sub reporter { $REPORTER }
 
+sub build_reporter_option {
+    my $class = shift;
+    return +{
+        color => ! $ENV{TEST_IKA_NOCOLOR},
+    };
+}
+
 sub set_reporter {
     my ($class, $module) = @_;
     $REPORTER = $class->load_reporter($module);
@@ -45,7 +52,8 @@ sub load_reporter {
     my ($class, $module) = @_;
     $module = ($module =~ s/^\+// ? $module : "Test::Ika::Reporter::$module");
     Module::Load::load($module);
-    return $module->new();
+
+    return $module->new(__PACKAGE__->build_reporter_option);
 }
 
 sub describe {
