@@ -37,6 +37,7 @@ t/09_conditional.t
 t/10_xdescribe.t
 t/11_xcontext.t
 t/12_conditional_context.t
+t/13_hooks_with_example.t
 xt/02_perlcritic.t
 META.yml
 MANIFEST
